@@ -25,33 +25,33 @@ export const TaskFilters: React.FC<TaskFiltersProps> = ({
   ];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.75rem' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '1.5rem' }}>
+      <div className="filters-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.85rem' }}>
         
         {/* Search Bar */}
-        <div style={{ position: 'relative', flex: '1', minWidth: '260px' }}>
-          <Search size={18} style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+        <div style={{ position: 'relative', flex: '1', minWidth: '240px' }}>
+          <Search size={17} style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
           <input
             type="text"
-            placeholder="Rechercher une tâche par titre ou description..."
+            placeholder="Rechercher une tâche..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             className="input-field"
-            style={{ paddingLeft: '2.6rem' }}
+            style={{ paddingLeft: '2.5rem' }}
           />
         </div>
 
         {/* Add Task Button */}
-        <button onClick={onOpenCreateModal} className="btn-primary">
-          <Plus size={18} />
+        <button onClick={onOpenCreateModal} className="btn-primary" style={{ whiteSpace: 'nowrap' }}>
+          <Plus size={17} />
           <span>Nouvelle Tâche</span>
         </button>
       </div>
 
       {/* Filter Tabs */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', overflowX: 'auto', paddingBottom: '0.25rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginRight: '0.5rem', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-          <Filter size={15} />
+      <div className="filter-tabs" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', overflowX: 'auto', paddingBottom: '0.2rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', marginRight: '0.4rem', color: 'var(--text-muted)', fontSize: '0.8rem', whiteSpace: 'nowrap' }}>
+          <Filter size={14} />
           <span>Filtrer par :</span>
         </div>
         {tabs.map((tab) => {
@@ -61,9 +61,9 @@ export const TaskFilters: React.FC<TaskFiltersProps> = ({
               key={tab.value}
               onClick={() => onStatusChange(tab.value)}
               style={{
-                padding: '0.45rem 0.9rem',
-                borderRadius: '10px',
-                fontSize: '0.85rem',
+                padding: '0.4rem 0.8rem',
+                borderRadius: '9px',
+                fontSize: '0.8rem',
                 fontWeight: isActive ? 600 : 500,
                 border: '1px solid',
                 borderColor: isActive ? 'var(--primary-color)' : 'transparent',

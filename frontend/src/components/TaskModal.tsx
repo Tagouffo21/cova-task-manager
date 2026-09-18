@@ -80,7 +80,7 @@ export const TaskModal: React.FC<TaskModalProps> = ({
       justifyContent: 'center',
       padding: '1rem'
     }}>
-      <div className="glass-panel animate-modal-pop" style={{ width: '100%', maxWidth: '520px', background: '#111827', padding: '1.75rem', border: '1px solid var(--border-color)' }}>
+      <div className="glass-panel modal-container animate-modal-pop" style={{ width: '100%', maxWidth: '520px', background: '#111827', padding: '1.75rem', border: '1px solid var(--border-color)' }}>
         
         {/* Modal Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>

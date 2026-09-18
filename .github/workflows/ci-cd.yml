@@ -7,14 +7,13 @@ on:
     branches: [ "main", "master" ]
 
 env:
-  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   GCP_REGION: us-central1
   BACKEND_SERVICE_NAME: cova-task-manager-backend
   FRONTEND_SERVICE_NAME: cova-task-manager-frontend
 
 jobs:
   # =========================================================
-  # JOB 1 : BACKEND CI/CD (Tests, Build, Docker & GCP Cloud Run)
+  # JOB 1 : BACKEND CI/CD (Build, Unit Tests & Docker/GCP Cloud Run)
   # =========================================================
   backend-pipeline:
     name: Backend CI/CD (Spring Boot)
@@ -31,30 +30,30 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Run Maven Tests & Build Package
+      - name: Run Maven Unit Tests & Build Package
         working-directory: ./backend
         run: mvn clean package -B
 
       - name: Set up Docker Buildx
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && secrets.GCP_SA_KEY != ''
         uses: docker/setup-buildx-action@v3
 
       - name: Authenticate to Google Cloud
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && secrets.GCP_SA_KEY != ''
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
       - name: Set up Cloud SDK
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && secrets.GCP_SA_KEY != ''
         uses: google-github-actions/setup-gcloud@v2
 
       - name: Configure Docker for GCP Artifact Registry
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && secrets.GCP_SA_KEY != ''
         run: gcloud auth configure-docker gcr.io --quiet
 
       - name: Build and Push Backend Docker Image
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && secrets.GCP_SA_KEY != ''
         run: |
           IMAGE_TAG="gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.BACKEND_SERVICE_NAME }}:${{ github.sha }}"
           docker build -t $IMAGE_TAG ./backend
@@ -63,7 +62,7 @@ jobs:
           docker push "gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.BACKEND_SERVICE_NAME }}:latest"
 
       - name: Deploy Backend to GCP Cloud Run
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && secrets.GCP_SA_KEY != ''
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: ${{ env.BACKEND_SERVICE_NAME }}
@@ -75,7 +74,7 @@ jobs:
           flags: '--allow-unauthenticated'
 
   # =========================================================
-  # JOB 2 : FRONTEND CI/CD (Lint, Build, Docker & GCP Cloud Run)
+  # JOB 2 : FRONTEND CI/CD (Build React & Docker/GCP Cloud Run)
   # =========================================================
   frontend-pipeline:
     name: Frontend CI/CD (React + Vite)
@@ -85,7 +84,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js 20
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -99,21 +98,21 @@ jobs:
           npm run build
 
       - name: Authenticate to Google Cloud
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && secrets.GCP_SA_KEY != ''
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
       - name: Set up Cloud SDK
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && secrets.GCP_SA_KEY != ''
         uses: google-github-actions/setup-gcloud@v2
 
       - name: Configure Docker for GCP
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && secrets.GCP_SA_KEY != ''
         run: gcloud auth configure-docker gcr.io --quiet
 
       - name: Build and Push Frontend Docker Image
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && secrets.GCP_SA_KEY != ''
         run: |
           IMAGE_TAG="gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.FRONTEND_SERVICE_NAME }}:${{ github.sha }}"
           docker build -t $IMAGE_TAG ./frontend
@@ -122,7 +121,7 @@ jobs:
           docker push "gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.FRONTEND_SERVICE_NAME }}:latest"
 
       - name: Deploy Frontend to GCP Cloud Run
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && secrets.GCP_SA_KEY != ''
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: ${{ env.FRONTEND_SERVICE_NAME }}

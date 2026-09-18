@@ -6,8 +6,8 @@
   /* Color Palette - Dark Modern Obsidian Theme */
   --bg-primary: #0b0f19;
   --bg-secondary: #111827;
-  --bg-card: rgba(17, 24, 39, 0.7);
-  --bg-card-hover: rgba(31, 41, 55, 0.8);
+  --bg-card: rgba(17, 24, 39, 0.75);
+  --bg-card-hover: rgba(31, 41, 55, 0.85);
   --bg-modal: #111827;
   
   --border-color: rgba(255, 255, 255, 0.08);
@@ -62,6 +62,7 @@ body {
     radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
     radial-gradient(circle at 85% 85%, rgba(217, 70, 239, 0.08) 0%, transparent 40%);
   background-attachment: fixed;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Glassmorphism Utilities */
@@ -93,6 +94,7 @@ body {
   gap: 0.5rem;
   transition: all 0.25s ease;
   box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+  touch-action: manipulation;
 }
 
 .btn-primary:hover {
@@ -111,8 +113,10 @@ body {
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   transition: all 0.2s ease;
+  touch-action: manipulation;
 }
 
 .btn-secondary:hover {
@@ -130,8 +134,10 @@ body {
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.4rem;
   transition: all 0.2s ease;
+  touch-action: manipulation;
 }
 
 .btn-danger:hover {
@@ -167,6 +173,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
+  white-space: nowrap;
 }
 
 .badge-pending {
@@ -223,8 +230,8 @@ body {
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -238,4 +245,78 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile & Tablet Responsiveness */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  .nav-header {
+    padding: 0.75rem 1rem !important;
+  }
+
+  .nav-brand-title {
+    font-size: 1.1rem !important;
+  }
+
+  .nav-user-info {
+    display: none !important; /* Compact display on mobile */
+  }
+
+  .stat-cards-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .stat-card-padding {
+    padding: 0.9rem !important;
+  }
+
+  .stat-card-number {
+    font-size: 1.4rem !important;
+  }
+
+  .dashboard-banner {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1rem !important;
+    padding: 1.1rem 1.25rem !important;
+  }
+
+  .dashboard-banner button {
+    width: 100% !important;
+  }
+
+  .filters-container {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .task-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .modal-container {
+    padding: 1.25rem !important;
+    max-width: 95vw !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .stat-cards-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .filter-tabs {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem !important;
+  }
 }

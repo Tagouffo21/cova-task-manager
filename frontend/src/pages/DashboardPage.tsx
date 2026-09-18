@@ -118,16 +118,16 @@ export const DashboardPage: React.FC = () => {
       <main style={{ maxWidth: '1280px', width: '100%', margin: '0 auto', padding: '2rem 1.5rem', flex: 1 }}>
         
         {/* Banner */}
-        <div className="glass-panel animate-fade-in" style={{ padding: '1.5rem 2rem', marginBottom: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(217, 70, 239, 0.08) 100%)', border: '1px solid rgba(99, 102, 241, 0.2)' }}>
+        <div className="glass-panel dashboard-banner animate-fade-in" style={{ padding: '1.25rem 1.75rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(217, 70, 239, 0.08) 100%)', border: '1px solid rgba(99, 102, 241, 0.2)' }}>
           <div>
-            <h2 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '0.25rem' }}>
+            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.2rem' }}>
               Espace de Gestion des Tâches
             </h2>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
               Organisez, filtrez et synchronisez vos priorités en temps réel.
             </p>
           </div>
-          <button onClick={() => { setEditingTask(null); setIsModalOpen(true); }} className="btn-primary">
+          <button onClick={() => { setEditingTask(null); setIsModalOpen(true); }} className="btn-primary" style={{ whiteSpace: 'nowrap' }}>
             <Plus size={18} />
             <span>Créer une Tâche</span>
           </button>
@@ -152,12 +152,12 @@ export const DashboardPage: React.FC = () => {
             <span>Chargement de vos tâches...</span>
           </div>
         ) : tasks.length === 0 ? (
-          <div className="glass-panel animate-fade-in" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
-            <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: 'rgba(255,255,255,0.03)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem auto', color: 'var(--text-muted)' }}>
-              <Inbox size={32} />
+          <div className="glass-panel animate-fade-in" style={{ textAlign: 'center', padding: '3.5rem 1.5rem' }}>
+            <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'rgba(255,255,255,0.03)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem auto', color: 'var(--text-muted)' }}>
+              <Inbox size={28} />
             </div>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.5rem' }}>Aucune tâche trouvée</h3>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', maxWidth: '400px', margin: '0 auto 1.5rem auto' }}>
+            <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.4rem' }}>Aucune tâche trouvée</h3>
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', maxWidth: '400px', margin: '0 auto 1.25rem auto' }}>
               {searchQuery || currentStatus !== 'ALL'
                 ? 'Aucune tâche ne correspond à vos filtres actuels. Essayez de réinitialiser la recherche.'
                 : 'Vous n’avez encore créé aucune tâche. Cliquez ci-dessous pour ajouter votre première tâche !'}
@@ -168,7 +168,7 @@ export const DashboardPage: React.FC = () => {
             </button>
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.25rem' }}>
+          <div className="task-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.1rem' }}>
             {tasks.map((task) => (
               <TaskCard
                 key={task.id}
