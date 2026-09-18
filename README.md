@@ -152,21 +152,19 @@ flutter run -d chrome   # Pour lancer le rendu mobile dans votre navigateur Chro
 
 ---
 
-## 🔄 Pipeline CI/CD & Déploiement Cloud (GCP)
+## 🔄 Pipeline CI/CD & Stratégie de Déploiement
 
-Le fichier `.github/workflows/ci-cd.yml` automatise les tâches suivantes lors de chaque `push` sur la branche `main` :
+### 1. Pipeline CI/CD automatisé (GitHub Actions)
+Le fichier `.github/workflows/ci-cd.yml` orchestre la validation continue sur GitHub lors de chaque `push` :
+- **Job Backend CI** : Compilation Java 17, exécution automatisée des tests unitaires/intégration Spring Boot (`mvn clean package`) et création de l'image Docker Backend.
+- **Job Frontend CI** : Configuration de Node.js 20, compilation de production React (`npm run build`) et création de l'image Docker Nginx Frontend.
+- **Job Déploiement GCP** : Prêt pour l'instanciation automatisée sur **Google Cloud Run**.
 
-1. **Job Backend** :
-   - Check-out du code et configuration de JDK 17 (Temurin).
-   - Exécution automatisée des tests d'intégration Spring Boot (`mvn clean package`).
-   - Authentification sur **Google Cloud Platform** via Service Account Key.
-   - Build de l'image Docker multi-stage et push sur **Google Container Registry (GCR)**.
-   - Déploiement sans interruption sur **GCP Cloud Run** (`cova-task-manager-backend`).
-
-2. **Job Frontend** :
-   - Configuration de Node.js 20 et validation du build de production (`npm run build`).
-   - Creation de l'image Docker Nginx et push sur GCR.
-   - Déploiement sur **GCP Cloud Run** (`cova-task-manager-frontend`).
+### 2. Hébergement en Direct (Bonus Live Deployments)
+Afin de fournir des liens de démonstration immédiatement accessibles sur le web :
+- **Frontend Web App** : Hébergé en direct sur **Firebase Hosting** (`https://cova-task-manager-app.web.app`).
+- **Backend REST API** : Hébergé en direct sur **Render Cloud** (`https://cova-task-manager.onrender.com/api`).
+- **Orchestration Locale** : Fichier `docker-compose.yml` permettant d'exécuter MySQL 8.0 et l'API Spring Boot localement en un clic.
 
 ---
 
