@@ -170,26 +170,31 @@ Le fichier `.github/workflows/ci-cd.yml` automatise les tâches suivantes lors d
 
 ---
 
-## 🌐 Liens d'Accès & Déploiement Cloud (GCP Cloud Run)
+## 🌐 Liens d'Accès & Déploiement Cloud (Démos en Direct)
+
+### 🚀 Application Web & API Déployées en Direct (Live Links)
+- 🔗 **Application Web Frontend (Firebase Hosting)** : [https://cova-task-manager-app.web.app](https://cova-task-manager-app.web.app)
+- 🔗 **API Backend REST (Cloud Render)** : [https://cova-task-manager.onrender.com/api](https://cova-task-manager.onrender.com/api)
+- 🔗 **Documentation Swagger UI (Live)** : [https://cova-task-manager.onrender.com/swagger-ui.html](https://cova-task-manager.onrender.com/swagger-ui.html)
 
 ### 🔑 Identifiants du Compte Démo (Accès Immédiat Recruteurs)
-Pour tester immédiatement l'application sans créer de compte, utilisez les identifiants pré-configurés :
+Pour tester immédiatement l'application en ligne ou en local sans créer de compte :
 - 📧 **Email** : `recruiter@cova.africa`
 - 🔒 **Mot de passe** : `CovaRecruit2026!`
 
-### 💻 Accès Local Immédiat
+### 💻 Accès Local Alternative (Optionnel)
 - 🔗 **Application Web Frontend** : [http://localhost:5173](http://localhost:5173)
 - 🔗 **API Backend REST** : [http://localhost:8080/api](http://localhost:8080/api)
-- 🔗 **Documentation Swagger UI (Interactive)** : [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+- 🔗 **Documentation Swagger UI** : [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
-### ☁️ Déploiement Cloud (Bonus Google Cloud Run)
-Le projet est entièrement configuré pour un déploiement serverless automatisé sur **Google Cloud Platform (Cloud Run)** via GitHub Actions (`.github/workflows/ci-cd.yml`) :
+---
 
-- **Frontend Cloud Run** : `https://cova-task-manager-frontend-uc.a.run.app`
-- **Backend Cloud Run** : `https://cova-task-manager-backend-uc.a.run.app`
-- **Swagger UI Cloud Run** : `https://cova-task-manager-backend-uc.a.run.app/swagger-ui.html`
+## ⚙️ CI/CD & Déploiement DevOps (GCP Cloud Run & Docker)
 
-> 💡 *Note pour les évaluateurs : Le pipeline CI/CD GitHub Actions instancie automatiquement les conteneurs Docker sur GCP Cloud Run dès la configuration des clés d'accès GCP (`GCP_PROJECT_ID` et `GCP_SA_KEY`) dans les Secrets du dépôt GitHub.*
+Le projet est entièrement configuré avec les meilleures pratiques DevOps :
+- **GitHub Actions Pipeline** (`.github/workflows/ci-cd.yml`) : Pipeline automatisé effectuant le build, les tests unitaires Spring Boot/Maven, la compilation React et le build des conteneurs Docker.
+- **Google Cloud Run Ready** : Déploiement automatisé multi-stage sur GCP Cloud Run.
+- **Docker Compose** (`docker-compose.yml`) : Orchestration locale avec MySQL 8.0 + Backend Spring Boot.
 
 
 ---
