@@ -174,8 +174,8 @@ Le fichier `.github/workflows/ci-cd.yml` automatise les tâches suivantes lors d
 
 ### 🚀 Application Web & API Déployées en Direct (Live Links)
 - 🔗 **Application Web Frontend (Firebase Hosting)** : [https://cova-task-manager-app.web.app](https://cova-task-manager-app.web.app)
-- 🔗 **API Backend REST (Cloud Render)** : [https://cova-task-manager-backend.onrender.com/api](https://cova-task-manager-backend.onrender.com/api)
-- 🔗 **Documentation Swagger UI (Live)** : [https://cova-task-manager-backend.onrender.com/swagger-ui.html](https://cova-task-manager-backend.onrender.com/swagger-ui.html)
+- 🔗 **API Backend REST (Cloud Render)** : [https://cova-task-manager.onrender.com/api](https://cova-task-manager.onrender.com/api)
+- 🔗 **Documentation Swagger UI (Live)** : [https://cova-task-manager.onrender.com/swagger-ui.html](https://cova-task-manager.onrender.com/swagger-ui.html)
 
 ### 🔑 Identifiants du Compte Démo (Accès Immédiat Recruteurs)
 Pour tester immédiatement l'application en ligne ou en local sans créer de compte :
