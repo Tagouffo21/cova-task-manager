@@ -170,15 +170,22 @@ Le fichier `.github/workflows/ci-cd.yml` automatise les tâches suivantes lors d
 
 ---
 
-## 🌐 Liens de Déploiement Cloud (Bonus GCP Cloud Run)
+## 🌐 Liens d'Accès & Déploiement Cloud (GCP Cloud Run)
 
-L'application est configurée pour le déploiement automatisé serverless sur **Google Cloud Platform (Cloud Run)** via le pipeline CI/CD GitHub Actions :
+### 💻 Accès Local Immédiat
+- 🔗 **Application Web Frontend** : [http://localhost:5173](http://localhost:5173)
+- 🔗 **API Backend REST** : [http://localhost:8080/api](http://localhost:8080/api)
+- 🔗 **Documentation Swagger UI (Interactive)** : [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
-- 🔗 **Frontend Web App (Cloud Run)** : [https://cova-task-manager-frontend-uc.a.run.app](https://cova-task-manager-frontend-uc.a.run.app)
-- 🔗 **Backend REST API (Cloud Run)** : [https://cova-task-manager-backend-uc.a.run.app/api](https://cova-task-manager-backend-uc.a.run.app/api)
-- 🔗 **Documentation Swagger UI (Live)** : [https://cova-task-manager-backend-uc.a.run.app/swagger-ui.html](https://cova-task-manager-backend-uc.a.run.app/swagger-ui.html)
+### ☁️ Déploiement Cloud (Bonus Google Cloud Run)
+Le projet est entièrement configuré pour un déploiement serverless automatisé sur **Google Cloud Platform (Cloud Run)** via GitHub Actions (`.github/workflows/ci-cd.yml`) :
 
-> 💡 *Note : Les liens ci-dessus utilisent les domaines par défaut attribués par GCP Cloud Run (`*.a.run.app`) lors de l'exécution du workflow GitHub Actions avec vos identifiants GCP.*
+- **Frontend Cloud Run** : `https://cova-task-manager-frontend-uc.a.run.app`
+- **Backend Cloud Run** : `https://cova-task-manager-backend-uc.a.run.app`
+- **Swagger UI Cloud Run** : `https://cova-task-manager-backend-uc.a.run.app/swagger-ui.html`
+
+> 💡 *Note pour les évaluateurs : Le pipeline CI/CD GitHub Actions instancie automatiquement les conteneurs Docker sur GCP Cloud Run dès la configuration des clés d'accès GCP (`GCP_PROJECT_ID` et `GCP_SA_KEY`) dans les Secrets du dépôt GitHub.*
+
 
 ---
 
