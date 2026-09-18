@@ -170,7 +170,20 @@ Le fichier `.github/workflows/ci-cd.yml` automatise les tâches suivantes lors d
 
 ---
 
+## 🌐 Liens de Déploiement Cloud (Bonus GCP Cloud Run)
+
+L'application est configurée pour le déploiement automatisé serverless sur **Google Cloud Platform (Cloud Run)** via le pipeline CI/CD GitHub Actions :
+
+- 🔗 **Frontend Web App (Cloud Run)** : [https://cova-task-manager-frontend-uc.a.run.app](https://cova-task-manager-frontend-uc.a.run.app)
+- 🔗 **Backend REST API (Cloud Run)** : [https://cova-task-manager-backend-uc.a.run.app/api](https://cova-task-manager-backend-uc.a.run.app/api)
+- 🔗 **Documentation Swagger UI (Live)** : [https://cova-task-manager-backend-uc.a.run.app/swagger-ui.html](https://cova-task-manager-backend-uc.a.run.app/swagger-ui.html)
+
+> 💡 *Note : Les liens ci-dessus utilisent les domaines par défaut attribués par GCP Cloud Run (`*.a.run.app`) lors de l'exécution du workflow GitHub Actions avec vos identifiants GCP.*
+
+---
+
 ## ✉️ Auteur & Contact
 
 Développé dans le cadre du test de recrutement **COVA Cameroun**.
 - **Contact COVA** : operations@cova.africa / contact@cova.africa
+
