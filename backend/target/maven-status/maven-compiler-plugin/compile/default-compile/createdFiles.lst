@@ -1,4 +1,5 @@
 com\cova\taskmanager\config\SecurityConfig.class
+com\cova\taskmanager\controller\RootController.class
 com\cova\taskmanager\service\AuthService.class
 com\cova\taskmanager\entity\Task$TaskBuilder.class
 com\cova\taskmanager\exception\GlobalExceptionHandler.class
