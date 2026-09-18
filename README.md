@@ -172,6 +172,11 @@ Le fichier `.github/workflows/ci-cd.yml` automatise les tâches suivantes lors d
 
 ## 🌐 Liens d'Accès & Déploiement Cloud (GCP Cloud Run)
 
+### 🔑 Identifiants du Compte Démo (Accès Immédiat Recruteurs)
+Pour tester immédiatement l'application sans créer de compte, utilisez les identifiants pré-configurés :
+- 📧 **Email** : `recruiter@cova.africa`
+- 🔒 **Mot de passe** : `CovaRecruit2026!`
+
 ### 💻 Accès Local Immédiat
 - 🔗 **Application Web Frontend** : [http://localhost:5173](http://localhost:5173)
 - 🔗 **API Backend REST** : [http://localhost:8080/api](http://localhost:8080/api)
