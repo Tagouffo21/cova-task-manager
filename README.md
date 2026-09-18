@@ -170,6 +170,25 @@ Le fichier `.github/workflows/ci-cd.yml` automatise les tâches suivantes lors d
 
 ---
 
+## 📷 Captures d'écran de l'Application (Screenshots)
+
+### 1. Page de Connexion & Inscription
+![Page de Connexion](./screenshots/login.png)
+
+### 2. Tableau de Bord & Statistiques
+![Tableau de bord](./screenshots/dashbord.png)
+
+### 3. Liste des Tâches & Filtrage
+![Liste des tâches](./screenshots/liste%20des%20tâches.png)
+
+### 4. Fenêtre de Création d'une Tâche
+![Création d'une tâche](./screenshots/création%20d’une%20tâche.png)
+
+### 5. Modification d'une Tâche Existante
+![Modification d'une tâche](./screenshots/modification%20d’une%20tâche.png)
+
+---
+
 ## 🌐 Liens d'Accès & Déploiement Cloud (Démos en Direct)
 
 ### 🚀 Application Web & API Déployées en Direct (Live Links)
