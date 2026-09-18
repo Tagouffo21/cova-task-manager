@@ -6,17 +6,12 @@ on:
   pull_request:
     branches: [ "main", "master" ]
 
-env:
-  GCP_REGION: us-central1
-  BACKEND_SERVICE_NAME: cova-task-manager-backend
-  FRONTEND_SERVICE_NAME: cova-task-manager-frontend
-
 jobs:
   # =========================================================
-  # JOB 1 : BACKEND CI/CD (Maven Tests, Build & Docker Image)
+  # JOB 1 : BACKEND CI (Maven Unit Tests, Build & Docker Image)
   # =========================================================
-  backend-pipeline:
-    name: Backend CI/CD (Spring Boot)
+  backend-ci:
+    name: Backend CI (Spring Boot)
     runs-on: ubuntu-latest
 
     steps:
@@ -41,26 +36,11 @@ jobs:
         run: |
           docker build -t cova-task-manager-backend:latest ./backend
 
-      - name: Authenticate to Google Cloud (Optional GCP Deploy)
-        if: github.ref == 'refs/heads/main' && secrets.GCP_SA_KEY != ''
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
-
-      - name: Deploy Backend to GCP Cloud Run
-        if: github.ref == 'refs/heads/main' && secrets.GCP_SA_KEY != ''
-        uses: google-github-actions/deploy-cloudrun@v2
-        with:
-          service: ${{ env.BACKEND_SERVICE_NAME }}
-          region: ${{ env.GCP_REGION }}
-          image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.BACKEND_SERVICE_NAME }}:${{ github.sha }}
-          flags: '--allow-unauthenticated'
-
   # =========================================================
-  # JOB 2 : FRONTEND CI/CD (React Build & Nginx Docker Image)
+  # JOB 2 : FRONTEND CI (React Build & Nginx Docker Image)
   # =========================================================
-  frontend-pipeline:
-    name: Frontend CI/CD (React + Vite)
+  frontend-ci:
+    name: Frontend CI (React + Vite)
     runs-on: ubuntu-latest
 
     steps:
@@ -87,17 +67,54 @@ jobs:
         run: |
           docker build -t cova-task-manager-frontend:latest ./frontend
 
-      - name: Authenticate to Google Cloud (Optional GCP Deploy)
-        if: github.ref == 'refs/heads/main' && secrets.GCP_SA_KEY != ''
+  # =========================================================
+  # JOB 3 : GCP CLOUD RUN DEPLOYMENT (Bonus Cloud Deploy)
+  # =========================================================
+  gcp-deploy:
+    name: GCP Cloud Run Deployment
+    needs: [backend-ci, frontend-ci]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && secrets.GCP_SA_KEY != ''
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-      - name: Deploy Frontend to GCP Cloud Run
-        if: github.ref == 'refs/heads/main' && secrets.GCP_SA_KEY != ''
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for GCP Artifact Registry
+        run: gcloud auth configure-docker gcr.io --quiet
+
+      - name: Build and Push Backend Docker Image
+        run: |
+          IMAGE_TAG="gcr.io/${{ secrets.GCP_PROJECT_ID }}/cova-task-manager-backend:${{ github.sha }}"
+          docker build -t $IMAGE_TAG ./backend
+          docker push $IMAGE_TAG
+
+      - name: Deploy Backend to GCP Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
         with:
-          service: ${{ env.FRONTEND_SERVICE_NAME }}
-          region: ${{ env.GCP_REGION }}
-          image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.FRONTEND_SERVICE_NAME }}:${{ github.sha }}
+          service: cova-task-manager-backend
+          region: us-central1
+          image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/cova-task-manager-backend:${{ github.sha }}
+          flags: '--allow-unauthenticated'
+
+      - name: Build and Push Frontend Docker Image
+        run: |
+          IMAGE_TAG="gcr.io/${{ secrets.GCP_PROJECT_ID }}/cova-task-manager-frontend:${{ github.sha }}"
+          docker build -t $IMAGE_TAG ./frontend
+          docker push $IMAGE_TAG
+
+      - name: Deploy Frontend to GCP Cloud Run
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: cova-task-manager-frontend
+          region: us-central1
+          image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/cova-task-manager-frontend:${{ github.sha }}
           flags: '--allow-unauthenticated'
