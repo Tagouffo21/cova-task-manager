@@ -14,6 +14,7 @@ com\cova\taskmanager\security\CustomUserDetailsService.class
 com\cova\taskmanager\TaskManagerApplication.class
 com\cova\taskmanager\repository\TaskRepository.class
 com\cova\taskmanager\dto\LoginRequest.class
+com\cova\taskmanager\config\DataInitializer.class
 com\cova\taskmanager\exception\BadRequestException.class
 com\cova\taskmanager\dto\RegisterRequest.class
 com\cova\taskmanager\entity\User.class

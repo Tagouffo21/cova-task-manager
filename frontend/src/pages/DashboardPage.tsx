@@ -12,6 +12,7 @@ import type { ToastMessage } from '../components/Toast';
 import { Loader2, Plus, Inbox } from 'lucide-react';
 
 export const DashboardPage: React.FC = () => {
+  const [allTasks, setAllTasks] = useState<Task[]>([]);
   const [tasks, setTasks] = useState<Task[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currentStatus, setCurrentStatus] = useState<TaskStatus | 'ALL'>('ALL');
@@ -35,17 +36,27 @@ export const DashboardPage: React.FC = () => {
     setToasts((prev) => prev.filter((t) => t.id !== id));
   };
 
+  const fetchAllTasks = useCallback(async () => {
+    try {
+      const fullList = await taskService.getTasks('ALL', '');
+      setAllTasks(fullList);
+    } catch (err: any) {
+      console.error('Erreur chargement des stats:', err);
+    }
+  }, []);
+
   const fetchTasks = useCallback(async () => {
     setIsLoading(true);
     try {
       const data = await taskService.getTasks(currentStatus, searchQuery);
       setTasks(data);
+      await fetchAllTasks();
     } catch (err: any) {
       addToast('error', err.message || 'Impossible de charger la liste des tâches');
     } finally {
       setIsLoading(false);
     }
-  }, [currentStatus, searchQuery]);
+  }, [currentStatus, searchQuery, fetchAllTasks]);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
@@ -123,7 +134,7 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {/* Summary Stat Cards */}
-        <StatCards tasks={tasks} />
+        <StatCards tasks={allTasks} />
 
         {/* Search & Filter bar */}
         <TaskFilters

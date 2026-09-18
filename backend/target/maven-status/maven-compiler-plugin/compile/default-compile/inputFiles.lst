@@ -5,6 +5,7 @@ C:\Users\VANESSA\.gemini\antigravity-ide\scratch\cova-task-manager\backend\src\m
 C:\Users\VANESSA\.gemini\antigravity-ide\scratch\cova-task-manager\backend\src\main\java\com\cova\taskmanager\entity\TaskStatus.java
 C:\Users\VANESSA\.gemini\antigravity-ide\scratch\cova-task-manager\backend\src\main\java\com\cova\taskmanager\exception\UnauthorizedAccessException.java
 C:\Users\VANESSA\.gemini\antigravity-ide\scratch\cova-task-manager\backend\src\main\java\com\cova\taskmanager\security\CustomUserDetailsService.java
+C:\Users\VANESSA\.gemini\antigravity-ide\scratch\cova-task-manager\backend\src\main\java\com\cova\taskmanager\config\DataInitializer.java
 C:\Users\VANESSA\.gemini\antigravity-ide\scratch\cova-task-manager\backend\src\main\java\com\cova\taskmanager\dto\ApiErrorResponse.java
 C:\Users\VANESSA\.gemini\antigravity-ide\scratch\cova-task-manager\backend\src\main\java\com\cova\taskmanager\dto\UserResponse.java
 C:\Users\VANESSA\.gemini\antigravity-ide\scratch\cova-task-manager\backend\src\main\java\com\cova\taskmanager\dto\TaskResponse.java
